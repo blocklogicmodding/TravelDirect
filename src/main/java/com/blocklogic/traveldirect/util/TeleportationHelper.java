@@ -1,4 +1,6 @@
 // src/main/java/com/blocklogic/traveldirect/util/TeleportationHelper.java
+// Simplified version that stores player-specific dimension positions
+
 package com.blocklogic.traveldirect.util;
 
 import net.minecraft.core.BlockPos;

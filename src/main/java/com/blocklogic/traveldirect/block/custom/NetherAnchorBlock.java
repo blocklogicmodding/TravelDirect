@@ -59,27 +59,40 @@ public class NetherAnchorBlock extends Block {
     private void teleportToNether(ServerPlayer player) {
         ServerLevel netherLevel = player.getServer().getLevel(Level.NETHER);
         if (netherLevel != null) {
-            // Calculate target position
-            BlockPos targetPos = calculateSafeNetherPos(player, netherLevel);
+            // Try to get the last Nether position first
+            BlockPos lastNetherPos = TeleportationHelper.getLastPosition(player, Level.NETHER);
 
-            // Make sure the player won't suffocate
-            while (!netherLevel.getBlockState(targetPos).isAir() ||
-                    !netherLevel.getBlockState(targetPos.above()).isAir()) {
-                targetPos = targetPos.above();
+            if (lastNetherPos != null) {
+                // We have a stored Nether position, teleport there
+                player.teleportTo(netherLevel,
+                        lastNetherPos.getX() + 0.5,
+                        lastNetherPos.getY(),
+                        lastNetherPos.getZ() + 0.5,
+                        player.getYRot(),
+                        player.getXRot());
+            } else {
+                // No stored position, calculate a new one
+                BlockPos targetPos = calculateSafeNetherPos(player, netherLevel);
+
+                // Make sure the player won't suffocate
+                while (!netherLevel.getBlockState(targetPos).isAir() ||
+                        !netherLevel.getBlockState(targetPos.above()).isAir()) {
+                    targetPos = targetPos.above();
+                }
+
+                // Ensure there's a solid block below
+                if (netherLevel.getBlockState(targetPos.below()).isAir()) {
+                    netherLevel.setBlock(targetPos.below(), net.minecraft.world.level.block.Blocks.NETHERRACK.defaultBlockState(), 3);
+                }
+
+                // Teleport the player
+                player.teleportTo(netherLevel,
+                        targetPos.getX() + 0.5,
+                        targetPos.getY(),
+                        targetPos.getZ() + 0.5,
+                        player.getYRot(),
+                        player.getXRot());
             }
-
-            // Ensure there's a solid block below
-            if (netherLevel.getBlockState(targetPos.below()).isAir()) {
-                netherLevel.setBlock(targetPos.below(), net.minecraft.world.level.block.Blocks.NETHERRACK.defaultBlockState(), 3);
-            }
-
-            // Teleport the player
-            player.teleportTo(netherLevel,
-                    targetPos.getX() + 0.5,
-                    targetPos.getY(),
-                    targetPos.getZ() + 0.5,
-                    player.getYRot(),
-                    player.getXRot());
 
             // Give first-time teleport kit
             giveFirstTimeNetherKit(player);

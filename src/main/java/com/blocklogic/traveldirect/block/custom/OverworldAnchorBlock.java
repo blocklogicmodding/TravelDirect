@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,8 +39,15 @@ public class OverworldAnchorBlock extends Block {
             return InteractionResult.SUCCESS;
         }
 
-        // Teleport player to Overworld
+        // Store the current Nether position before teleporting back
         if (player instanceof ServerPlayer serverPlayer) {
+            // Store the current position in the Nether - where this anchor was placed
+            TeleportationHelper.storeLastPosition(
+                    serverPlayer,
+                    Level.NETHER,
+                    pos.above() // Position above the anchor
+            );
+
             teleportToOverworld(serverPlayer);
             return InteractionResult.SUCCESS;
         }

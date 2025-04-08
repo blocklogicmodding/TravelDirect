@@ -7,11 +7,13 @@
 
   "message.traveldirect.already_in_nether": "You are already in the Nether!",
   "message.traveldirect.teleport_nether": "Teleported to the Nether!",
-  "message.traveldirect.first_time_kit": "You've received an Overworld Anchor and Activator for your return journey!",
+  "message.traveldirect.first_time_kit_simple": "You've received an Overworld Anchor for your return journey!",
 
   "message.traveldirect.already_in_overworld": "You are already in the Overworld!",
   "message.traveldirect.teleport_overworld": "Teleported to the Overworld!",
 
   "message.traveldirect.already_in_end": "You are already in the End!",
-  "message.traveldirect.teleport_end": "Teleported to the End!"
+  "message.traveldirect.teleport_end": "Teleported to the End!",
+
+  "message.traveldirect.no_linked_nether": "This anchor is not linked to any Nether location. Place a Nether Anchor to create a link."
 }
