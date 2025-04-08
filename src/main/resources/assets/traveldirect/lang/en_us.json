@@ -1,12 +1,17 @@
 {
-  "item.traveldirect.overworld_activator": "Overworld Activator",
-  "item.traveldirect.nether_activator": "Nether Activator",
-  "item.traveldirect.end_activator": "End Activator",
-  "item.traveldirect.activator_pouch": "Travel Direct Activator Storage Pouch",
-
   "block.traveldirect.overworld_anchor": "Overworld Travel Anchor",
   "block.traveldirect.nether_anchor": "Nether Travel Anchor",
   "block.traveldirect.end_anchor": "End Travel Anchor",
 
-  "creativetab.traveldirect.travel_direct": "Travel Direct"
+  "creativetab.traveldirect.travel_direct": "Travel Direct",
+
+  "message.traveldirect.already_in_nether": "You are already in the Nether!",
+  "message.traveldirect.teleport_nether": "Teleported to the Nether!",
+  "message.traveldirect.first_time_kit": "You've received an Overworld Anchor and Activator for your return journey!",
+
+  "message.traveldirect.already_in_overworld": "You are already in the Overworld!",
+  "message.traveldirect.teleport_overworld": "Teleported to the Overworld!",
+
+  "message.traveldirect.already_in_end": "You are already in the End!",
+  "message.traveldirect.teleport_end": "Teleported to the End!"
 }

@@ -18,11 +18,6 @@ public class ModCreativeModeTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.END_ANCHOR.get()))
             .title(Component.translatable("creativetab.traveldirect.travel_direct"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(ModItems.OVERWORLD_ACTIVATOR);
-                        output.accept(ModItems.NETHER_ACTIVATOR);
-                        output.accept(ModItems.END_ACTIVATOR);
-                        output.accept(ModItems.ACTIVATOR_POUCH);
-
                         output.accept(ModBlocks.OVERWORLD_ANCHOR);
                         output.accept(ModBlocks.NETHER_ANCHOR);
                         output.accept(ModBlocks.END_ANCHOR);
