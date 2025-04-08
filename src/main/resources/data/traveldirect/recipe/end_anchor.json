@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:ender_eye"
+    },
+    "E": {
+      "item": "minecraft:end_stone_bricks"
+    },
+    "O": {
+      "item": "minecraft:end_crystal"
+    }
+  },
+  "pattern": [
+    "###",
+    "EOE",
+    "EEE"
+  ],
+  "result": {
+    "id": "traveldirect:end_anchor",
+    "count": 1
+  }
+}

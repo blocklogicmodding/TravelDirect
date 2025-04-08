@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "traveldirect:overworld_anchor",
+    "traveldirect:nether_anchor",
+    "traveldirect:end_anchor"
+  ]
+}

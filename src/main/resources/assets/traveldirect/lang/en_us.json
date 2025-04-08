@@ -1,0 +1,12 @@
+{
+  "item.traveldirect.overworld_activator": "Overworld Activator",
+  "item.traveldirect.nether_activator": "Nether Activator",
+  "item.traveldirect.end_activator": "End Activator",
+  "item.traveldirect.activator_pouch": "Travel Direct Activator Storage Pouch",
+
+  "block.traveldirect.overworld_anchor": "Overworld Travel Anchor",
+  "block.traveldirect.nether_anchor": "Nether Travel Anchor",
+  "block.traveldirect.end_anchor": "End Travel Anchor",
+
+  "creativetab.traveldirect.travel_direct": "Travel Direct"
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "traveldirect:block/overworld_anchor"
+    }
+  }
+}
