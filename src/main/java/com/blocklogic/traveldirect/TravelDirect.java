@@ -3,6 +3,7 @@ package com.blocklogic.traveldirect;
 import com.blocklogic.traveldirect.block.ModBlocks;
 import com.blocklogic.traveldirect.item.ModCreativeModeTabs;
 import com.blocklogic.traveldirect.item.ModItems;
+import com.blocklogic.traveldirect.sound.ModSounds;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -61,6 +62,7 @@ public class TravelDirect
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
+        ModSounds.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

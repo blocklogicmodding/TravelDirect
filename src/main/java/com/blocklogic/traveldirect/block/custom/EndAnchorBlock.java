@@ -1,5 +1,6 @@
 package com.blocklogic.traveldirect.block.custom;
 
+import com.blocklogic.traveldirect.sound.ModSounds;
 import com.blocklogic.traveldirect.util.TeleportationHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -68,7 +69,7 @@ public class EndAnchorBlock extends Block {
                     true);
 
             player.playNotifySound(
-                    SoundEvents.END_PORTAL_FRAME_FILL,
+                    ModSounds.END_ANCHOR_USE.get(),
                     SoundSource.PLAYERS,
                     1.0f,
                     1.0f);
