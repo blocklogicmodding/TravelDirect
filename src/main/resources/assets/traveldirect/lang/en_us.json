@@ -6,6 +6,7 @@
   "creativetab.traveldirect.travel_direct": "Travel Direct",
 
   "message.traveldirect.first_time_kit_simple": "You've received an Overworld Anchor for your return journey!",
+  "message.traveldirect.item_dropped": "You've received an Overworld Anchor (floating nearby) for your return journey!",
   "message.traveldirect.already_in_overworld": "You are already in the Overworld!",
   "message.traveldirect.teleport_overworld": "Teleported to the Overworld!",
   "message.traveldirect.already_in_nether": "You are already in the Nether!",

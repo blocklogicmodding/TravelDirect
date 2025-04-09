@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -193,13 +194,31 @@ public class NetherAnchorBlock extends Block {
         CompoundTag persistentData = player.getPersistentData();
 
         if (!persistentData.contains("traveldirect.received_nether_kit")) {
-            player.getInventory().add(new ItemStack(ModBlocks.OVERWORLD_ANCHOR.get()));
+            // Create the item stack
+            ItemStack anchorStack = new ItemStack(ModBlocks.OVERWORLD_ANCHOR.get());
 
+            // Drop directly at player's feet
+            ItemEntity itemEntity = new ItemEntity(
+                    player.level(),
+                    player.getX(),
+                    player.getY() + 0.5, // Drop slightly higher than player position
+                    player.getZ(),
+                    anchorStack
+            );
+
+            // Set a small pickup delay so it doesn't immediately get picked up
+            itemEntity.setPickUpDelay(10);
+
+            // Add the item to the world
+            player.level().addFreshEntity(itemEntity);
+
+            // Notify the player
             player.displayClientMessage(
                     Component.translatable("message.traveldirect.first_time_kit_simple")
                             .withStyle(ChatFormatting.GOLD),
                     false);
 
+            // Mark as received in persistent data
             persistentData.putBoolean("traveldirect.received_nether_kit", true);
         }
     }
