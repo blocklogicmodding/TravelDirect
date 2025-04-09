@@ -16,10 +16,8 @@ public class ModCreativeModeTabs {
 
     public static final Supplier<CreativeModeTab> TRAVEL_DIRECT = CREATIVE_MODE_TAB.register("travel_direct",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.END_ANCHOR.get()))
-            .title(Component.translatable("creativetab.traveldirect.travel_direct"))
+                    .title(Component.translatable("creativetab.traveldirect.travel_direct"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(ModBlocks.OVERWORLD_ANCHOR);
-                        output.accept(ModBlocks.NETHER_ANCHOR);
                         output.accept(ModBlocks.END_ANCHOR);
                     }).build());
 

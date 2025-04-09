@@ -5,9 +5,10 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,14 +42,14 @@ public class EndAnchorBlock extends Block {
         }
 
         if (player instanceof ServerPlayer serverPlayer) {
-            ResourceKey<Level> currentDimension = serverPlayer.level().dimension();
+            // Store the current position as the return position
+            ServerLevel currentLevel = serverPlayer.serverLevel();
+            BlockPos safePos = TeleportationHelper.findSafeSpotNearPosition(currentLevel, pos);
+            if (safePos == null) {
+                safePos = pos.above();
+            }
 
-            TeleportationHelper.storeLastPosition(
-                    serverPlayer,
-                    currentDimension,
-                    pos.above()
-            );
-
+            TeleportationHelper.storeReturnPosition(serverPlayer, safePos);
             teleportToEnd(serverPlayer);
             return InteractionResult.SUCCESS;
         }
@@ -59,16 +60,7 @@ public class EndAnchorBlock extends Block {
     private void teleportToEnd(ServerPlayer player) {
         ServerLevel endLevel = player.getServer().getLevel(Level.END);
         if (endLevel != null) {
-            BlockPos endSpawnPos = BlockPos.containing(100, 50, 0);
-
-            BlockPos targetPos = findSafeSpot(endLevel, endSpawnPos);
-
-            player.teleportTo(endLevel,
-                    targetPos.getX() + 0.5,
-                    targetPos.getY(),
-                    targetPos.getZ() + 0.5,
-                    player.getYRot(),
-                    player.getXRot());
+            TeleportationHelper.safelyTeleportToEnd(player, endLevel);
 
             player.displayClientMessage(
                     Component.translatable("message.traveldirect.teleport_end")
@@ -76,82 +68,10 @@ public class EndAnchorBlock extends Block {
                     true);
 
             player.playNotifySound(
-                    net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT,
-                    net.minecraft.sounds.SoundSource.PLAYERS,
+                    SoundEvents.END_PORTAL_FRAME_FILL,
+                    SoundSource.PLAYERS,
                     1.0f,
                     1.0f);
-        }
-    }
-
-    private BlockPos findSafeSpot(ServerLevel level, BlockPos pos) {
-        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
-
-        for (int radius = 0; radius < 16; radius++) {
-            for (int x = -radius; x <= radius; x++) {
-                for (int z = -radius; z <= radius; z++) {
-                    if (Math.abs(x) != radius && Math.abs(z) != radius) {
-                        continue;
-                    }
-
-                    mutablePos.set(pos.getX() + x, pos.getY(), pos.getZ() + z);
-
-                    for (int y = pos.getY(); y > level.getMinBuildHeight() + 1; y--) {
-                        mutablePos.setY(y);
-
-                        if (!level.getBlockState(mutablePos).isAir() &&
-                                level.getBlockState(mutablePos.above()).isAir() &&
-                                level.getBlockState(mutablePos.above(2)).isAir()) {
-                            return mutablePos.above().immutable();
-                        }
-                    }
-                }
-            }
-        }
-
-        mutablePos.set(pos.getX(), pos.getY(), pos.getZ());
-        for (int x = -1; x <= 1; x++) {
-            for (int z = -1; z <= 1; z++) {
-                level.setBlock(
-                        mutablePos.offset(x, -1, z),
-                        net.minecraft.world.level.block.Blocks.OBSIDIAN.defaultBlockState(),
-                        3
-                );
-
-                level.setBlock(
-                        mutablePos.offset(x, 0, z),
-                        net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(),
-                        3
-                );
-                level.setBlock(
-                        mutablePos.offset(x, 1, z),
-                        net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(),
-                        3
-                );
-            }
-        }
-
-        return mutablePos.immutable();
-    }
-
-    @Override
-    public boolean canSurvive(BlockState state, LevelReader levelReader, BlockPos pos) {
-        if (levelReader instanceof Level level) {
-            if (level.dimension() == Level.NETHER) {
-                return false;
-            }
-        }
-        return super.canSurvive(state, levelReader, pos);
-    }
-
-    @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        super.setPlacedBy(level, pos, state, placer, stack);
-
-        if (level.isClientSide() && level.dimension() == Level.NETHER && placer instanceof Player player) {
-            player.displayClientMessage(
-                    Component.translatable("message.traveldirect.cannot_place_end_in_nether")
-                            .withStyle(ChatFormatting.LIGHT_PURPLE),
-                    true);
         }
     }
 
@@ -180,5 +100,4 @@ public class EndAnchorBlock extends Block {
             }
         }
     }
-
 }

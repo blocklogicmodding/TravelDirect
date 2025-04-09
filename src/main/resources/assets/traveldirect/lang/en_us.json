@@ -1,27 +1,11 @@
 {
-  "block.traveldirect.overworld_anchor": "Overworld Travel Anchor",
-  "block.traveldirect.nether_anchor": "Nether Travel Anchor",
   "block.traveldirect.end_anchor": "End Travel Anchor",
 
   "creativetab.traveldirect.travel_direct": "Travel Direct",
 
-  "message.traveldirect.first_time_kit_simple": "You've received an Overworld Anchor for your return journey!",
-  "message.traveldirect.item_dropped": "You've received an Overworld Anchor (floating nearby) for your return journey!",
-  "message.traveldirect.already_in_overworld": "You are already in the Overworld!",
-  "message.traveldirect.teleport_overworld": "Teleported to the Overworld!",
-  "message.traveldirect.already_in_nether": "You are already in the Nether!",
-  "message.traveldirect.teleport_nether": "Teleported to the Nether!",
   "message.traveldirect.already_in_end": "You are already in the End!",
   "message.traveldirect.teleport_end": "Teleported to the End!",
-  "message.traveldirect.no_linked_nether": "This anchor is not linked to any Nether location. Place a Nether Anchor to create a link.",
-  "message.traveldirect.cannot_place_nether_in_end": "You cannot place a Nether Anchor in the End!",
-  "message.traveldirect.cannot_place_end_in_nether": "You cannot place an End Anchor in the Nether!",
-  "message.traveldirect.cannot_place_overworld_in_end": "You cannot place an Overworld Anchor in the End! Use the End Portal to return to the Overworld.",
 
-  "tooltip.traveldirect.overworld_anchor": "Hold §aSHIFT §rfor more information",
-  "tooltip.traveldirect.overworld_anchor.shift_down": "Place the §aOverworld Anchor§r then right click it with an empty hand to teleport back to the §aOverworld§r",
-  "tooltip.traveldirect.nether_anchor": "Hold §aSHIFT §rfor more information",
-  "tooltip.traveldirect.nether_anchor.shift_down": "Place the §4Nether Anchor§r then right click it with an empty hand to teleport to the §4Nether§r",
   "tooltip.traveldirect.end_anchor": "Hold §aSHIFT §rfor more information",
   "tooltip.traveldirect.end_anchor.shift_down": "Place the §5End Anchor§r then right click it with an empty hand to teleport to the §5End§r"
 }

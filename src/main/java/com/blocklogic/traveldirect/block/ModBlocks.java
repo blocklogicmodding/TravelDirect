@@ -2,8 +2,6 @@ package com.blocklogic.traveldirect.block;
 
 import com.blocklogic.traveldirect.TravelDirect;
 import com.blocklogic.traveldirect.block.custom.EndAnchorBlock;
-import com.blocklogic.traveldirect.block.custom.NetherAnchorBlock;
-import com.blocklogic.traveldirect.block.custom.OverworldAnchorBlock;
 import com.blocklogic.traveldirect.item.ModItems;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -24,37 +22,12 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(TravelDirect.MODID);
 
-    public static final DeferredBlock<Block> OVERWORLD_ANCHOR = registerBlock("overworld_anchor",
-            () -> new OverworldAnchorBlock(BlockBehaviour.Properties.of()
-                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)){
-                @Override
-                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    if(Screen.hasShiftDown()) {
-                        tooltipComponents.add(Component.translatable("tooltip.traveldirect.overworld_anchor.shift_down"));
-                    } else {
-                        tooltipComponents.add(Component.translatable("tooltip.traveldirect.overworld_anchor"));
-                    }
-                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-                }
-            });
-
-    public static final DeferredBlock<Block> NETHER_ANCHOR = registerBlock("nether_anchor",
-            () -> new NetherAnchorBlock(BlockBehaviour.Properties.of()
-                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)) {
-                @Override
-                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-                    if(Screen.hasShiftDown()) {
-                        tooltipComponents.add(Component.translatable("tooltip.traveldirect.nether_anchor.shift_down"));
-                    } else {
-                        tooltipComponents.add(Component.translatable("tooltip.traveldirect.nether_anchor"));
-                    }
-                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-                }
-            });
-
     public static final DeferredBlock<Block> END_ANCHOR = registerBlock("end_anchor",
             () -> new EndAnchorBlock(BlockBehaviour.Properties.of()
-                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)) {
+                    .strength(4f).
+                    requiresCorrectToolForDrops().
+                    sound(SoundType.STONE)
+                    .lightLevel(state -> 11)) {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     if(Screen.hasShiftDown()) {
