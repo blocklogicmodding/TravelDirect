@@ -27,7 +27,7 @@ public class ModBlocks {
                     .strength(4f).
                     requiresCorrectToolForDrops().
                     sound(SoundType.STONE)
-                    .lightLevel(state -> 11)) {
+                    .lightLevel(state -> 15)) {
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     if(Screen.hasShiftDown()) {
