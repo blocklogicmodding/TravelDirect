@@ -13,6 +13,9 @@
   "message.traveldirect.already_in_end": "You are already in the End!",
   "message.traveldirect.teleport_end": "Teleported to the End!",
   "message.traveldirect.no_linked_nether": "This anchor is not linked to any Nether location. Place a Nether Anchor to create a link.",
+  "message.traveldirect.cannot_place_nether_in_end": "You cannot place a Nether Anchor in the End!",
+  "message.traveldirect.cannot_place_end_in_nether": "You cannot place an End Anchor in the Nether!",
+  "message.traveldirect.cannot_place_overworld_in_end": "You cannot place an Overworld Anchor in the End! Use the End Portal to return to the Overworld.",
 
   "tooltip.traveldirect.overworld_anchor": "Hold §aSHIFT §rfor more information",
   "tooltip.traveldirect.overworld_anchor.shift_down": "Place the §aOverworld Anchor§r then right click it with an empty hand to teleport back to the §aOverworld§r",

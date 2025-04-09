@@ -10,11 +10,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+
+import javax.annotation.Nullable;
 
 public class OverworldAnchorBlock extends Block {
     public OverworldAnchorBlock(Properties properties) {
@@ -83,6 +88,28 @@ public class OverworldAnchorBlock extends Block {
                     net.minecraft.sounds.SoundSource.PLAYERS,
                     1.0f,
                     1.0f);
+        }
+    }
+
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader levelReader, BlockPos pos) {
+        if (levelReader instanceof Level level) {
+            if (level.dimension() == Level.END) {
+                return false;
+            }
+        }
+        return super.canSurvive(state, levelReader, pos);
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+
+        if (level.isClientSide() && level.dimension() == Level.END && placer instanceof Player player) {
+            player.displayClientMessage(
+                    Component.translatable("message.traveldirect.cannot_place_overworld_in_end")
+                            .withStyle(ChatFormatting.GREEN),
+                    true);
         }
     }
 
