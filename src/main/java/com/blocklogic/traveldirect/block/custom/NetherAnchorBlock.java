@@ -4,10 +4,12 @@ import com.blocklogic.traveldirect.block.ModBlocks;
 import com.blocklogic.traveldirect.util.TeleportationHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -196,6 +198,32 @@ public class NetherAnchorBlock extends Block {
                     false);
 
             persistentData.putBoolean("traveldirect.received_nether_kit", true);
+        }
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (random.nextInt(100) < 40) {
+            for (int i = 0; i < random.nextInt(3) + 2; i++) {
+                double xOffset = random.nextDouble();
+                double zOffset = random.nextDouble();
+
+                if (random.nextBoolean()) {
+                    xOffset = xOffset < 0.5 ? 0.1 : 0.9;
+                } else {
+                    zOffset = zOffset < 0.5 ? 0.1 : 0.9;
+                }
+
+                double x = pos.getX() + xOffset;
+                double y = pos.getY() + 0.5D + random.nextDouble() * 0.5D;
+                double z = pos.getZ() + zOffset;
+
+                double xSpeed = 0;
+                double ySpeed = random.nextDouble() * 0.1D;
+                double zSpeed = 0;
+
+                level.addParticle(ParticleTypes.PORTAL, x, y, z, xSpeed, ySpeed, zSpeed);
+            }
         }
     }
 }

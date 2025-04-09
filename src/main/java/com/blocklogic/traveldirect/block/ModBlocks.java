@@ -26,7 +26,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> OVERWORLD_ANCHOR = registerBlock("overworld_anchor",
             () -> new OverworldAnchorBlock(BlockBehaviour.Properties.of()
-                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.LODESTONE)){
+                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)){
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
                     if(Screen.hasShiftDown()) {
@@ -40,11 +40,31 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> NETHER_ANCHOR = registerBlock("nether_anchor",
             () -> new NetherAnchorBlock(BlockBehaviour.Properties.of()
-                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.LODESTONE)));
+                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    if(Screen.hasShiftDown()) {
+                        tooltipComponents.add(Component.translatable("tooltip.traveldirect.nether_anchor.shift_down"));
+                    } else {
+                        tooltipComponents.add(Component.translatable("tooltip.traveldirect.nether_anchor"));
+                    }
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            });
 
     public static final DeferredBlock<Block> END_ANCHOR = registerBlock("end_anchor",
             () -> new EndAnchorBlock(BlockBehaviour.Properties.of()
-                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.LODESTONE)));
+                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)) {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+                    if(Screen.hasShiftDown()) {
+                        tooltipComponents.add(Component.translatable("tooltip.traveldirect.end_anchor.shift_down"));
+                    } else {
+                        tooltipComponents.add(Component.translatable("tooltip.traveldirect.end_anchor"));
+                    }
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            });
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

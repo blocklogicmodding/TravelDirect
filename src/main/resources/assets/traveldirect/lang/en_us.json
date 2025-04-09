@@ -15,5 +15,9 @@
   "message.traveldirect.no_linked_nether": "This anchor is not linked to any Nether location. Place a Nether Anchor to create a link.",
 
   "tooltip.traveldirect.overworld_anchor": "Hold §aSHIFT §rfor more information",
-  "tooltip.traveldirect.overworld_anchor.shift_down": "Place the §aOverworld Anchor§r then right click it with an empty hand to teleport back to the §aOverworld§r"
+  "tooltip.traveldirect.overworld_anchor.shift_down": "Place the §aOverworld Anchor§r then right click it with an empty hand to teleport back to the §aOverworld§r",
+  "tooltip.traveldirect.nether_anchor": "Hold §aSHIFT §rfor more information",
+  "tooltip.traveldirect.nether_anchor.shift_down": "Place the §4Nether Anchor§r then right click it with an empty hand to teleport to the §4Nether§r",
+  "tooltip.traveldirect.end_anchor": "Hold §aSHIFT §rfor more information",
+  "tooltip.traveldirect.end_anchor.shift_down": "Place the §5End Anchor§r then right click it with an empty hand to teleport to the §5End§r"
 }
